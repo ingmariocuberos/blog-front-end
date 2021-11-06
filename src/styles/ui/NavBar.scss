@@ -1,0 +1,83 @@
+.nav__container-icon-title {
+    height: 100%;
+    position: relative;
+    left: 0;
+  }
+  
+  .nav__principal-icon {
+    height: 40px;
+    position: relative;
+    top: -2px;
+  }
+  
+  .nav__title {
+    color: #fff;
+    position: relative;
+    top: 2px;
+    font-weight: 900;
+    margin-top: 30px;
+  }
+  
+  #navbarSupportedContent {
+    position: absolute;
+    right: 1vw;
+  }
+  
+  .nav__select-lenguaje {
+    height: 40px;
+    width: 40px;
+    background-color: #60c4fa40;
+    border-radius: 50%;
+  }
+  
+  .nav__select-lenguaje:hover {
+    background-color: #60c4fa66;
+    border-radius: 50%;
+  }
+  
+  .nav__spain-flag {
+    height: 15px;
+  }
+  
+  .navbar {
+    background: linear-gradient(to left, $primary, $primary-light);
+    display: flex;
+    align-items: center;
+ /*    justify-content: space-around; */
+    width: 100vw;
+  }
+  
+  .nav__link {
+    color: #fff;
+    padding: 7px 40px;
+  }
+
+  .nav__item{
+    margin-top: 10px;
+  }
+
+  .nav__button{
+    margin-top: 2px;
+    font-weight: 900;
+  }
+  
+  .nav__link:hover {
+    color: #fff;
+    height: 40px;
+    border-radius: 20px;
+    background-color: #60c4fa40;
+  }
+
+
+.btn2 {
+    width: 200px;
+    height: 40px;
+    border-radius: 40px;
+    text-align: center;
+    border: 2px solid #fff;
+  }
+  
+  .btn-login {
+    font-size: 15px;
+  }
+  

@@ -1,0 +1,42 @@
+.postView__wholePost{
+    background-color: transparentize($mysecondary, $amount: 0.7);
+    -webkit-box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    margin: 10px auto;
+    padding: 20px;
+    border-left: 3px inset $primary;
+    
+}
+
+.postView__title{
+    color: $primary;
+    font-size: 22px;
+    text-align: center;
+}
+
+.postView__shortText{
+    color: $primary;
+    font-size: 18px;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.postList__container-left{
+    width: 55vw;
+    min-width: 400px;
+    max-width: 1200px;
+    margin: 10px auto;
+    position: relative;
+}
+
+.postView__image{
+    width: 50vw;
+    max-height: 400px;
+    max-width: 1000px;
+    min-width: 350px;
+    -webkit-box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    object-fit: cover;
+
+}

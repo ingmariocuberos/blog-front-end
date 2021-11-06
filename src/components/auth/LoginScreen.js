@@ -8,8 +8,8 @@ import { loginWithEmailAndPassWord } from "../../actions/login";
 
 export const LoginScreen = () => {
     const initialForm = {
-        email: "undefined@gmail.com",
-        password: "123456",
+        email: "aleja@gmail.com",
+        password: "3114575344",
     };
 
     const [formValues, handleInputChange] = useForm(initialForm);
@@ -36,8 +36,6 @@ export const LoginScreen = () => {
 
     const handleLogin = (e) => {
         e.preventDefault();
-
-        console.log("Hola mundo");
 
         if( valida(email, password) ){
             dispatch( loginWithEmailAndPassWord( email, password ));
@@ -77,7 +75,7 @@ export const LoginScreen = () => {
                 </button>
 
                 <Link to="/auth/register" className="link">
-                    Create new account
+                    Crea una cuenta
                 </Link>
             </form>
         </>

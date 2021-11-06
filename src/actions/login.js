@@ -4,22 +4,80 @@ import { finishLoading, startLoading } from "./error";
 
 export const loginWithEmailAndPassWord = (email, password) =>{
     return (dispatch)=>{
-
-        console.log(email, password);
         
         const payload = JSON.stringify({
             email,
             password
         });
 
-        const respuesta = fetch(`http://localhost:81/backend-blog/controller/user/login.php`, {
+        const response = fetch(`http://localhost:81/backend-blog/controller/user/login.php`, {
             method: "POST",
             body: payload,
         }).then(data => data.text())
         .then(data =>{
-            console.log(JSON.parse(data))
+            const dataResponse = JSON.parse(data)
+
+            console.log(dataResponse);
+
+            if(dataResponse.token){
+                dispatch( login(email, dataResponse.token, dataResponse.usertype, dataResponse.name) );
+                Swal.fire({
+                    icon: "success",
+                    title: "Bienvenido de nuevo",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+            } else{
+                Swal.fire("Error", `${dataResponse.msg}`, "error");
+            }
         })
 
+    }
+}
+
+export const login = (email, token, usertype, name) =>({
+    type: types.login,
+    payload: {
+        email: email,
+        token: token,
+        usertype: usertype,
+        name: name
+    }
+});
+
+export const logout = () =>({
+    type: types.logout
+})
+
+export const userRegister = ( email, password, name, phone, type, creationDate, updateDate ) =>{
+    return (dispatch) =>{
+
+        const payload = JSON.stringify({
+            email,
+            password,
+            name,
+            phone,
+            type,
+            creationDate,
+            updateDate
+        });
+
+        const response = fetch(`http://localhost:81/backend-blog/controller/user/register.php`, {
+            method: "POST",
+            body: payload,
+        }).then(data => data.text())
+        .then(data =>{
+            const dataResponse = JSON.parse(data)
+
+            console.log(dataResponse);
+
+            if(dataResponse.token){
+                Swal.fire("Registro exitoso", "Tu registro ha sido exitoso", "success");
+                dispatch( login(email, dataResponse.token, type, name) );
+            } else{
+                Swal.fire("Error", `${dataResponse.msg}`, "error");
+            }
+        })
     }
 }
 
@@ -51,30 +109,10 @@ export const loginWithEmailAndPassWord = (email, password) =>{
     }
 }
 
-export const login = (uid, displayName) =>({
-    type: types.login,
-    payload: {
-        uid: uid,
-        displayName: displayName
-    }
-});
-
-export const logout = () =>({
-    type: types.logout
-})
 
 
 
-export const registerWithEmailAndPassword = ( email, password, displayName ) =>{
-    return (dispatch) =>{
-        firebase.auth().createUserWithEmailAndPassword( email, password )
-            .then( async({user}) =>{
-                await user.updateProfile({
-                    displayName: displayName
-                });
-                dispatch( login(user.uid, user.displayName))
-            }).catch(err =>{
-                Swal.fire('Error', err.message, 'error');
-            });
-    }
-} */
+
+
+
+ */

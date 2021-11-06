@@ -1,122 +1,138 @@
-import React from 'react';
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useForm } from '../../hooks/useForm';
+import { useForm } from "../../hooks/useForm";
 import v from "validator";
-
-
+import moment from "moment";
+import Swal from "sweetalert2";
+import { login, userRegister } from "../../actions/login";
 
 export const RegisterScreen = () => {
-
     const initialRegister = {
-        name: '',
-        email: '',
-        password: '',
-        password2: ''
-    }
+        name: "",
+        email: "",
+        password: "",
+        password2: "",
+        phone: "",
+    };
 
     const dispatch = useDispatch();
 
-    const { msgError } = useSelector( state => state.ui );
+    const { msgError } = useSelector((state) => state.ui);
 
-    const [ formValues, handleInputChange] = useForm( initialRegister );
+    const [formValues, handleInputChange] = useForm(initialRegister);
 
-    const { name , email, password, password2 } = formValues;
+    const { name, email, password, password2, phone } = formValues;
 
-    /* const validation = (name, email, password, password2) =>{
+    const refSelectForm = useRef("user");
+
+    const validation = (name, email, password, password2) =>{
 
         if( v.isEmpty(name)){
-            dispatch( setError('Debe ingresar un nombre'));
+            
+            Swal.fire("Error", "Debe ingresar un nombre", "error")
             return false;
         } else if( v.escape(name).includes(";") ){
-            dispatch(setError('Ingrese un nombre válido'))
-            return false;
+            Swal.fire("Error", "Ingrese un nombre válido", "error")
         } else if( !v.isEmail(email) ){
-            dispatch(setError('Ingrese un email válido'));
+            Swal.fire("Error", "Ingrese un email válido", "error")
             return false;
         } else if( password !== password2 || password.length < 5 ){
-            dispatch(setError('Passwords incorrectos'));
+            Swal.fire("Error", "Las contraseñas no coinciden", "error")
             return false;
         }
 
-        dispatch(removeError());
-
         return true;
-    } */
+    }
 
-    const handleRegister = (e) =>{
+    const handleRegister = (e) => {
         e.preventDefault();
 
-        /* const valida = validation(name, email, password, password2);
+        const creationDate = moment(new Date()).format("YYYY-MM-DD");
+        const updateDate = moment(new Date()).format("YYYY-MM-DD");
+
+        const valida = validation(name, email, password, password2);
         
 
         if( valida ){
-            dispatch(registerWithEmailAndPassword(email, password, name));
-        } */
-        
-    }
+            dispatch(userRegister(email, password, name, phone, refSelectForm.current.value, creationDate, updateDate));
 
-    
+        }
+    };
 
     return (
         <>
-            <h3 className="auth__title">Register</h3>
-
-            {
-                msgError !== null 
-                ?
-                <div className="auth__alert-error">{ msgError }</div>
-                :
-                undefined
-            }
-
-            <form onSubmit={ handleRegister }>
-                <input 
+            <form className="auth__form-login" onSubmit={handleRegister}>
+                <h3 className="auth__title">Registrate</h3>
+                <input
                     type="text"
-                    placeholder="Name"
+                    placeholder="Nombre"
                     name="name"
                     className="auth__input"
-                    value={ name }
-                    onChange={ handleInputChange }
-                    autoComplete="off" />
-                <input 
+                    value={name}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                    required
+                />
+                <input
                     type="email"
                     placeholder="Email"
                     name="email"
                     className="auth__input"
-                    value={ email }
-                    onChange={ handleInputChange }
-                    autoComplete="off" />
-                <input 
+                    value={email}
+                    onChange={handleInputChange}
+                    autoComplete="off"
+                    required
+                />
+                <input
                     type="password"
-                    placeholder="Password"
+                    placeholder="Contraseña"
                     name="password"
-                    value={ password }
-                    onChange={ handleInputChange }
-                    className="auth__input" />
+                    value={password}
+                    onChange={handleInputChange}
+                    className="auth__input"
+                    required
+                />
 
-                <input 
+                <input
                     type="password"
-                    placeholder="Confirm password"
+                    placeholder="Repita la contraseña"
                     name="password2"
-                    value={ password2 }
-                    onChange={ handleInputChange }
-                    className="auth__input" />
+                    value={password2}
+                    onChange={handleInputChange}
+                    className="auth__input"
+                    required
+                />
+
+                <input
+                    type="phone"
+                    placeholder="Teléfono"
+                    name="phone"
+                    value={phone}
+                    onChange={handleInputChange}
+                    className="auth__input"
+                    required
+                />
+
+
+                <label htmlFor="type">Elige el tipo (Solo para prueba técnica)</label>
+                <select ref={refSelectForm} name="type" id="type" required>
+                    <option value="user">User</option>
+                    <option value="admin">Admin</option>
+                </select>
 
                 <button
-                        type="submit"
-                        className="btn btn-primary btn-block mb-5"
-                > Register
-                </button>         
-                
-
-                <Link 
-                    to="/auth/login"
-                    className="link"
+                    type="submit"
+                    className="btn btn-primary btn-block mb-5"
                 >
-                    ¿Already registered?
+                    {" "}
+                    Registro
+                </button>
+
+                <Link to="/auth/login" className="link">
+                    ¿Ya estás registrado?
                 </Link>
             </form>
         </>
-    )
-}
+    );
+};

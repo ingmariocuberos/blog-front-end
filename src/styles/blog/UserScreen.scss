@@ -1,0 +1,67 @@
+.userScreen__container{
+    display: flex;
+    flex-direction: row;
+    background-color: $gray;
+    border-left: 2px inset $primary;
+    justify-content: space-between;
+    padding: 10px;
+    -webkit-box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    margin: 10px auto;
+    min-height: 200px;
+    width: 60vw;
+    max-width: 700px;
+}
+
+.userScreen__title{
+    color: $primary;
+    text-align: center;
+    margin: 30px auto;
+}
+
+.userScreen__container-add{
+    display: flex;
+    flex-direction: row;
+    margin: 10px auto;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    justify-content: space-around;
+    -webkit-box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    -moz-box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+    box-shadow: 10px 10px 21px -7px rgba(0, 0, 0, 0.38);
+}
+
+.userScreen__half-info{
+    display: flex;
+    flex-direction: row;
+}
+
+.userScreen__name{
+    font-size: 18px;
+    margin-left: 20px;
+}
+
+.userScreen__button{
+    height: 40px;
+}
+
+.userScreen__add-button{
+    color: $primary;
+    font-size: 35px;
+}
+
+.userScreen__info{
+    display: flex;
+    flex-direction: column;
+}
+
+.userScreen__options{
+    display: flex;
+    flex-direction: column;
+}
+
+.item-user{
+    margin-right: 30px;
+}

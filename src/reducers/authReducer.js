@@ -1,16 +1,21 @@
 import { types } from "../types/types";
 
+const initCurrentPage = localStorage.getItem("currentPage") ? localStorage.getItem("currentPage") : "Posts";
+
 const initialState = {
     loading: false,
-    msgError: null
+    msgError: null,
+    currentPage: initCurrentPage
 }
 
 export const authReducer = (state = initialState, action) =>{
     switch (action.type) {
         case types.login:
             return {
-                uid: action.payload.uid,
-                name: action.payload.displayName
+                email: action.payload.email,
+                token: action.payload.token,
+                name: action.payload.name,
+                usertype: action.payload.usertype
             };
 
         case types.logout:
@@ -48,7 +53,12 @@ export const registerReducer = (state = initialState, action) =>{
                 ...state,
                 msgError: null
             };
-            
+
+        case types.currentPage:
+            return {
+                ...state,
+                currentPage: action.payload
+            };            
     
         default:
             return state;
